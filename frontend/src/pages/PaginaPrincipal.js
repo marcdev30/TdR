@@ -1,5 +1,13 @@
+import MesDemanat from "../components/inici/MesDemanat";
+import Qualitats from "../components/inici/Qualitats";
+
 const PaginaPrincipal = () => {
-	return <p>Aquesta és la pàgina d'inici</p>;
+	return (
+		<>
+			<MesDemanat />
+			<Qualitats />
+		</>
+	);
 };
 
 export default PaginaPrincipal;

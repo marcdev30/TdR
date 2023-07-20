@@ -4,13 +4,13 @@ const CapçaleraComponent = () => {
 	return (
 		<Nav className="justify-content-center">
 			<Nav.Item>
-				<Nav.Link>Inici</Nav.Link>
+				<Nav.Link href="/">Inici</Nav.Link>
 			</Nav.Item>
 			<Nav.Item>
-				<Nav.Link>Menú</Nav.Link>
+				<Nav.Link href="/menu">Menú</Nav.Link>
 			</Nav.Item>
 			<Nav.Item>
-				<Nav.Link>Contacte</Nav.Link>
+				<Nav.Link href="/contacte">Contacte</Nav.Link>
 			</Nav.Item>
 		</Nav>
 	);
