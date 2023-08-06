@@ -1,5 +1,7 @@
+import FormesContacte from "../components/contacte/FormesContacte";
+
 const PaginaContacte = () => {
-	return <p>Aquesta és la pàgina de contacte</p>;
+  return <FormesContacte />;
 };
 
 export default PaginaContacte;
