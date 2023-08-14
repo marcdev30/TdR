@@ -3,13 +3,13 @@ import Qualitats from "../components/inici/Qualitats";
 import Presentacio from "../components/inici/Presentacio";
 
 const PaginaPrincipal = () => {
-  return (
-    <>
-      {/* <MesDemanat />
-			<Qualitats /> */}
-      <Presentacio />
-    </>
-  );
+	return (
+		<>
+			<Presentacio />
+			<MesDemanat />
+			<Qualitats />
+		</>
+	);
 };
 
 export default PaginaPrincipal;
