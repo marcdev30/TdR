@@ -1,161 +1,163 @@
 /* Presentació */
 .presentacio {
-	background-color: rgb(83, 83, 83);
-	height: 500px;
-	display: flex;
-	align-items: center;
-	margin-bottom: 150px;
+  background-color: rgb(83, 83, 83);
+  height: 500px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 150px;
 }
 
 .presentacio-contingut {
-	color: white;
-	padding-bottom: 20px;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
+  color: white;
+  padding-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .presentacio-contingut h1 {
-	font-size: 45px;
-	text-transform: uppercase;
+  font-size: 45px;
+  text-transform: uppercase;
 }
 
 .presentacio-contingut p {
-	margin: 18px 0 28px;
+  margin: 18px 0 28px;
 }
 
 .presentacio-contingut a {
-	margin-right: 20px;
+  margin-right: 20px;
 }
 
 .presentacio-comptaenrere {
-	display: flex;
-	align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .comptaenrere {
-	height: 200px;
-	width: 350px;
-	margin: auto 100px auto auto;
-	background-color: gray;
-	border-radius: 15px;
+  height: 200px;
+  width: 350px;
+  margin: auto 100px auto auto;
+  background-color: gray;
+  border-radius: 15px;
 }
 
 .comptaenrere h4 {
-	text-transform: uppercase;
-	font-size: 25px;
-	padding: 20px;
-	text-align: center;
-	margin: 0;
+  text-transform: uppercase;
+  font-size: 25px;
+  padding: 20px;
+  text-align: center;
+  margin: 0;
 }
 
 .comptaenrere hr {
-	margin-top: 0;
+  margin-top: 0;
 }
 
 .comptaenrere-estat {
-	font-size: 33px;
-	font-weight: bold;
-	color: #00ca51;
+  font-size: 33px;
+  font-weight: bold;
+  color: #00ca51;
 }
 
 .comptaenrere-digits {
-	display: flex;
-	column-gap: 10px;
-	justify-content: center;
-	font-size: 30px;
-	font-weight: 500;
+  display: flex;
+  column-gap: 10px;
+  justify-content: center;
+  font-size: 30px;
+  font-weight: 500;
 }
 
 .comptaenrere-digit {
-	height: 50px;
-	width: 40px;
-	padding: 0;
-	background-color: white;
-	border-radius: 10px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
+  height: 50px;
+  width: 40px;
+  padding: 0;
+  background-color: white;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* Mes demanat */
 
 .mes-demanat {
-	display: flex;
-	justify-content: center;
-	margin-bottom: 150px;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 150px;
 }
 
 .mes-demanat-info {
-	background-color: #c4c4c4;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	text-align: center;
-	border-radius: 8px;
-	padding: 20px;
-	width: 33%;
-	height: 200px;
-	margin: 30px -150px 0 0;
-	z-index: 2;
-	position: relative;
+  background-color: #c4c4c4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border-radius: 8px;
+  padding: 20px;
+  width: 33%;
+  height: 200px;
+  margin: 30px -150px 0 0;
+  z-index: 2;
+  position: relative;
 }
 
 .button {
-	position: absolute;
-	top: 177px;
-	background-color: white;
-	border: 1px solid black;
-	padding: 10px 20px;
-	text-decoration: none;
-	color: black;
-	font-weight: bold;
-	border-radius: 5px;
+  position: absolute;
+  top: 177px;
+  background-color: white;
+  border: 1px solid black;
+  padding: 10px 20px;
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+  border-radius: 5px;
 }
 
 .mes-demanat-img {
-	width: 55%;
-	border-radius: 8px;
+  width: 55%;
+  border-radius: 8px;
 }
 
 /* Qualitats */
 
 .qualitats {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .llista-qualitats {
-	margin: 40px;
-	display: flex;
-	justify-content: center;
-	align-items: top;
-	text-align: center;
-	column-gap: 65px;
+  margin: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: top;
+  text-align: center;
+  column-gap: 65px;
 }
 
 .qualitat {
-	display: flex;
-	flex-direction: column;
-	row-gap: 10px;
-	align-items: center;
-	flex-basis: 0;
-	transition: transform 250ms;
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+  align-items: center;
+  flex-basis: 0;
 }
 
 .qualitat > img {
-	height: 150px;
-	width: 250px;
-	margin-bottom: 5px;
-	object-fit: cover;
-	border-radius: 8px;
+  height: 150px;
+  width: 250px;
+  margin-bottom: 5px;
+  object-fit: cover;
+  border-radius: 8px;
+  transition: transform 250ms;
 }
 
-.qualitat:hover {
-	transform: scale(1.05);
+.qualitat:hover > img {
+  transform: scale(1.05);
 }
 
 @import url("menu.css");
 @import url("contacte.css");
+@import url("disseny.css");
+@import url("registre.css");

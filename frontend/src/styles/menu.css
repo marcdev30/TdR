@@ -1,44 +1,50 @@
 .quadricula {
-	display: flex;
-	padding: 100px 5%;
-	column-gap: 60px;
-	row-gap: 60px;
-	justify-content: center;
-	flex-wrap: wrap;
-	background-color: #f8f8f8;
+  display: flex;
+  padding: 100px 5%;
+  column-gap: 60px;
+  row-gap: 60px;
+  justify-content: center;
+  flex-wrap: wrap;
+  background-color: #f8f8f8;
+}
+
+@media (min-width: 1500px) {
+  .quadricula {
+    padding: 100px 10%;
+  }
 }
 
 .categoria {
-	width: 275px;
-	height: 309px;
-	background-color: white;
-	box-shadow: 0 0 45px 2px rgba(0, 0, 0, 0.25);
-	border-radius: 10px;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	cursor: pointer;
+  width: 275px;
+  height: 309px;
+  background-color: white;
+  box-shadow: 0 0 45px 2px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
 }
 
 .categoria img {
-	-ms-scroll-limit-x-max: x;
-	max-width: 90%;
-	height: auto;
-	margin-top: 20px;
-	flex: 4;
+  -ms-scroll-limit-x-max: x;
+  max-width: 90%;
+  height: auto;
+  margin-top: 20px;
+  flex: 4;
 }
 
 .categoria hr {
-	border: 1px solid #9c9c9c;
-	width: 100%;
+  border: 1px solid #9c9c9c;
+  width: 100%;
 }
 
 .categoria-nom {
-	text-align: center;
-	text-transform: uppercase;
-	font-size: 18px;
-	font-weight: bold;
-	letter-spacing: 0.5px;
-	flex: 1;
-	margin: 0;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 18px;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+  flex: 1;
+  margin: 0;
 }
