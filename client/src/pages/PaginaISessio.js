@@ -1,77 +1,93 @@
-import { IconButton } from "@mui/material";
-import TextField from "@mui/material/TextField";
-import ArrowCircleRightIcon from "@mui/icons-material/ArrowCircleRight";
-import { useRef, useState } from "react";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
+import FloatingLabel from "react-bootstrap/FloatingLabel";
+import { Link } from "react-router-dom";
+import "../styles/sesion.css";
+import * as formik from "formik";
+import * as yup from "yup";
+import { useState } from "react";
 
 const PaginaISessio = () => {
-  const registreForm = useRef(null);
-  const [formData, setFormData] = useState({
-    nom: "",
-    correu: "",
-    contrasenya: "",
-  });
+	const { Formik } = formik;
+	const schema = yup.object().shape({
+		username: yup.string().required("Has d'introduir un correu electrònic."),
+		password: yup.string().required("Has d'introduir la teva contrasenya."),
+	});
 
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-  };
+	const [submitted, setSubmitted] = useState(false);
 
-  const handleSubmit = () => {
-    // You can use formData to build the data object to be submitted.
-    const data = {
-      nom: formData.nom,
-      correu: formData.correu,
-      contrasenya: formData.contrasenya,
-    };
-
-    // Submit the data using a hidden form element
-    const form = document.createElement("form");
-    form.action = "/"; // Specify your form action here
-    form.method = "POST"; // Use the appropriate HTTP method
-    form.style.display = "none";
-
-    // Create hidden input elements for each data field
-    for (const key in data) {
-      const input = document.createElement("input");
-      input.type = "hidden";
-      input.name = key;
-      input.value = data[key];
-      form.appendChild(input);
-    }
-
-    // Append the form to the document body and submit it
-    document.body.appendChild(form);
-    form.submit();
-  };
-
-  return (
-    <div className="i-sessio">
-      <img src="/images/fons-registre.svg" alt="" />
-      <div className="isessio-formulari">
-        <div className="isessio-pas">
-          <h3>Inicia la sessió</h3>
-          <div className="d-flex flex-column mt-4">
-            <TextField
-              variant="standard"
-              className="me-3"
-              placeholder="Correu del centre"
-            />
-            <TextField
-              variant="standard"
-              className="me-3"
-              placeholder="Contrasenya"
-            />
-            <IconButton color="primary">
-              <ArrowCircleRightIcon sx={{ fontSize: "40px" }} />
-            </IconButton>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+	return (
+		<div className="i-sessio">
+			<img src="/images/fons-registre.svg" className="left" alt="" />
+			<div className="login">
+				<h2>Iniciar sessió</h2>
+				<Formik
+					validationSchema={schema}
+					onSubmit={fields => {
+						window.location.replace("/");
+					}}
+					initialValues={{ username: "", password: "" }}
+				>
+					{({ handleSubmit, handleChange, values, touched, errors }) => (
+						<Form
+							// noValidate
+							// onSubmit={handleSubmit}
+							action="/inici-sessio"
+							method="post"
+							className="w-100 d-flex flex-column"
+						>
+							<Form.Group className="mb-3 mt-4">
+								<FloatingLabel label="Email" className="mb-1">
+									<Form.Control
+										value={values.username}
+										name="username"
+										onChange={handleChange}
+										type="email"
+										placeholder=""
+										autoComplete="off"
+									/>
+								</FloatingLabel>
+								{errors.username && submitted && touched.username !== 0 ? (
+									<div>{errors.username}</div>
+								) : null}
+							</Form.Group>
+							<Form.Group className="mb-2">
+								<FloatingLabel label="Contrasenya" className="mb-3">
+									<Form.Control
+										value={values.password}
+										name="password"
+										onChange={handleChange}
+										type="password"
+										placeholder=""
+										autoComplete="off"
+									/>
+								</FloatingLabel>
+								{errors.password && submitted && touched.password !== 0 ? (
+									<div>{errors.password}</div>
+								) : null}
+							</Form.Group>
+							<Link
+								to="/"
+								className="align-self-end mb-5 text-decoration-none sesion-enlaces"
+							>
+								Has oblidat la teva contrasenya?
+							</Link>
+							<Button onClick={() => setSubmitted(true)} type="submit">
+								Iniciar sessió
+							</Button>
+							<p className="align-self-center text-center mt-4 sesion-enlaces">
+								No tens un compte?{" "}
+								<Link to="/registre" className="text-decoration-none">
+									Registra't
+								</Link>
+							</p>
+						</Form>
+					)}
+				</Formik>
+			</div>
+			<img src="/images/fons-registre.svg" className="right" alt="" />
+		</div>
+	);
 };
 
 export default PaginaISessio;

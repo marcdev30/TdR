@@ -1,35 +1,40 @@
 .registre {
-  display: flex;
-  height: 80vh;
+	display: flex;
+	height: 80vh;
 }
 
 .registre-formulari {
-  width: 60%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  height: 80%;
+	width: 80%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	height: 80%;
 }
 
 .registre-pas > h3 {
-  font-size: 60px;
+	font-size: 60px;
 }
 
 .registre-pas input {
-  margin-top: 15px;
-  font-size: 40px;
+	margin-top: 5px;
+	/* margin-left: px; */
+	font-size: 30px;
 }
 
 .registre-pas .MuiFormControl-root {
-  width: 55%;
-  margin-left: 5px;
+	width: 55%;
+	margin-left: 15px;
+}
+
+.segon-pas .MuiFormControl-root {
+	width: 80%;
 }
 
 .registre > img {
-  height: 100vh;
-  position: absolute;
-  top: 0;
-  right: 0;
-  z-index: -1;
+	height: 100vh;
+	position: absolute;
+	top: 0;
+	right: 0;
+	z-index: -1;
 }

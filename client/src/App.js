@@ -10,22 +10,24 @@ import PaginaProducte from "./pages/PaginaProducte";
 import PaginaRegistre from "./pages/PaginaRegistre";
 import PaginaISessio from "./pages/PaginaISessio";
 import PaginaDetallsProducte from "./pages/PaginaDetallsProducte";
+import PaginaPerfil from "./pages/PaginaPerfil";
 
 function App() {
-  return (
-    <BrowserRouter>
-      <CapçaleraComponent />
-      <Routes>
-        <Route path="/" element={<PaginaPrincipal />} />
-        <Route path="/menu" element={<PaginaMenu />} />
-        <Route path="/menu/:producteId" element={<PaginaProducte />} />
-        <Route path="/contacte" element={<PaginaContacte />} />
-        <Route path="/registre" element={<PaginaRegistre />} />
-        <Route path="/inici-sessio" element={<PaginaISessio />} />
-      </Routes>
-      <PeuComponent />
-    </BrowserRouter>
-  );
+	return (
+		<BrowserRouter>
+			<CapçaleraComponent />
+			<Routes>
+				<Route path="/" element={<PaginaPrincipal />} />
+				<Route path="/menu" element={<PaginaMenu />} />
+				<Route path="/producte/:producteId" element={<PaginaProducte />} />
+				<Route path="/contacte" element={<PaginaContacte />} />
+				<Route path="/registre" element={<PaginaRegistre />} />
+				<Route path="/inici-sessio" element={<PaginaISessio />} />
+				<Route path="/perfil" element={<PaginaPerfil />} />
+			</Routes>
+			<PeuComponent />
+		</BrowserRouter>
+	);
 }
 
 export default App;

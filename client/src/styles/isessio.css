@@ -1,43 +1,53 @@
 .i-sessio {
-  display: flex;
-  height: 80vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 80vh;
 }
 
 .isessio-formulari {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  height: 80%;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	height: 80%;
 }
 
 .isessio-pas {
-  width: min-content;
+	width: min-content;
 }
 
 .isessio-pas > h3 {
-  font-size: 60px;
-  text-wrap: nowrap;
+	font-size: 60px;
+	text-wrap: nowrap;
 }
 
 .isessio-pas input {
-  margin-top: 15px;
-  font-size: 25px;
+	margin-top: 15px;
+	font-size: 25px;
 }
 
 .isessio-pas .MuiFormControl-root {
-  width: 95%;
-  margin-left: 5px;
-  /* flex: 1; */
-  margin-bottom: 20px;
+	width: 95%;
+	margin-left: 5px;
+	/* flex: 1; */
+	margin-bottom: 20px;
 }
 
 .i-sessio > img {
-  height: 100vh;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: -1;
-  transform: scaleX(-1);
+	height: 100vh;
+	position: absolute;
+	top: 0;
+	z-index: -1;
+}
+
+.i-sessio > img.left {
+	left: 0;
+	transform: scaleX(-1);
+}
+
+.i-sessio > img.right {
+	right: 0;
+	transform: scaleY(-1);
 }

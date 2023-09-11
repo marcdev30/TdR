@@ -1,0 +1,46 @@
+.login-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: rgb(61, 60, 60);
+}
+
+.login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 400px;
+  background-color: white;
+  border-radius: 10px;
+  height: 450px;
+  padding: 40px;
+}
+
+.login > h2,
+.signup > h2 {
+  font-weight: bold;
+}
+
+.signup-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: rgb(61, 60, 60);
+}
+
+.signup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 400px;
+  background-color: white;
+  border-radius: 10px;
+  min-height: 600px;
+  padding: 40px;
+}
+
+.sesion-enlaces {
+  font-size: 14px;
+}
