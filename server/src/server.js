@@ -6,94 +6,297 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const cors = require("cors");
-const Producte = require("./models/Producte").default;
-const Categoria = require("./models/Categoria").default;
 
 // DB configuration
 const session = require("express-session");
 const passport = require("passport");
+const { default: mongoose } = require("mongoose");
 
 // .env configuration
 require("dotenv").config();
 
 // Models
 const Usuari = require("./models/Usuari").default;
+const Producte = require("./models/Producte").default;
+const Categoria = require("./models/Categoria").default;
+const Comanda = require("./models/Comanda").default;
 
 /**** Configuration ****/
 const app = express();
 
-function createServer() {
-  const apiRoutes = require("./apiRoutes")();
-  const mesDemanat = require("./utils/tasques")();
+async function createServer() {
+	const apiRoutes = require("./apiRoutes")();
+	const mesDemanat = require("./utils/tasques")();
 
-  app.use(bodyParser.json());
-  app.use(bodyParser.urlencoded({ extended: false }));
-  app.use(morgan("combined"));
-  app.use(cors());
-  app.use(express.static(path.resolve("..", "client", "build")));
-  app.use(
-    session({
-      secret: "e3Uecl59gxp2WM5cclI2",
-      resave: false,
-      saveUninitialized: false,
-    })
-  );
+	const AdminJS = (await import("adminjs")).default;
+	const AdminJSExpress = (await import("@adminjs/express")).default;
+	AdminJSMongoose = await import("@adminjs/mongoose");
+	const { ComponentLoader } = await import("adminjs");
+	const componentLoader = new ComponentLoader();
+	const Components = {
+		BotoRealitzat: componentLoader.add("BotoRealitzat", "./boto-realitzat"),
+		// other custom components
+	};
+	// await mongoose.connect(
+	// 	"mongodb+srv://admin:passwd@maincluster.5epli6n.mongodb.net/mainDB?retryWrites=true&w=majority"
+	// );
+	AdminJS.registerAdapter({
+		Resource: AdminJSMongoose.Resource,
+		Database: AdminJSMongoose.Database,
+	});
+	const admin = new AdminJS({
+		rootPath: "/admin",
+		resources: [
+			{
+				resource: Usuari,
+				options: {
+					navigation: {},
+					listProperties: ["nom", "username", "comandes", "saldo"],
+					showProperties: ["nom", "username", "comandes", "saldo"],
+					filterProperties: ["nom", "username", "saldo"],
+					actions: {
+						edit: { isAccessible: false, isVisible: false },
+						new: { isAccessible: false, isVisible: false },
+					},
+				},
+			},
+			{ resource: Comanda, options: { navigation: false } },
+			{
+				resource: Comanda,
+				options: {
+					id: "ComandesPendents",
+					navigation: { name: "Comandes" },
+					listProperties: ["usuari", "producte", "estat", "comentaris"],
+					showProperties: ["usuari", "producte", "estat", "comentaris", "creada"],
+					filterProperties: ["usuari", "producte", "creada"],
+					actions: {
+						list: {
+							after: async response => {
+								// console.log(response.records);
+								response.records = response.records.filter(
+									record => record.params.estat === "pendent"
+								);
+								return response;
+							},
+						},
+						new: {
+							isAccessible: false,
+							isVisible: false,
+						},
+					},
+					properties: {
+						estat: {
+							availableValues: [
+								{ value: "pendent", label: "Pendent" },
+								{ value: "preparada", label: "Preparada" },
+								{ value: "entregada", label: "Entregada" },
+								{ value: "cancelada", label: "Cancel·lada" },
+							],
+						},
+						// boto: {
+						// 	components: { list: Components.BotoRealitzat },
+						// },
+					},
+				},
+			},
+			{
+				resource: Comanda,
+				options: {
+					id: "ComandesPreparades",
+					navigation: { name: "Comandes" },
+					listProperties: ["usuari", "producte", "estat", "comentaris"],
+					actions: {
+						list: {
+							after: async response => {
+								// console.log(response.records);
+								response.records = response.records.filter(
+									record => record.params.estat === "preparada"
+								);
+								return response;
+							},
+						},
+						new: {
+							isAccessible: false,
+							isVisible: false,
+						},
+					},
+					properties: {
+						estat: {
+							availableValues: [
+								{ value: "pendent", label: "Pendent" },
+								{ value: "preparada", label: "Preparada" },
+								{ value: "entregada", label: "Entregada" },
+								{ value: "cancelada", label: "Cancel·lada" },
+							],
+						},
+						// boto: {
+						// 	components: { list: Components.BotoRealitzat },
+						// },
+					},
+				},
+			},
+			{
+				resource: Comanda,
+				options: {
+					id: "ComandesEntregades",
+					navigation: { name: "Comandes" },
+					listProperties: ["usuari", "producte", "estat", "comentaris"],
+					actions: {
+						list: {
+							after: async response => {
+								// console.log(response.records);
+								response.records = response.records.filter(
+									record => record.params.estat === "entregada"
+								);
+								return response;
+							},
+						},
+						new: {
+							isAccessible: false,
+							isVisible: false,
+						},
+					},
+					properties: {
+						estat: {
+							availableValues: [
+								{ value: "pendent", label: "Pendent" },
+								{ value: "preparada", label: "Preparada" },
+								{ value: "entregada", label: "Entregada" },
+								{ value: "cancelada", label: "Cancel·lada" },
+							],
+						},
+						// boto: {
+						// 	components: { list: Components.BotoRealitzat },
+						// },
+					},
+				},
+			},
+			{
+				resource: Producte,
+				options: {
+					navigation: {},
+					listProperties: ["nom", "preu", "descripcio"],
+					showProperties: ["nom", "preu", "descripcio", "imatge"],
+					editProperties: ["nom", "preu", "descripcio", "imatge"],
+					filterProperties: ["nom", "preu"],
+					properties: {
+						preu: { type: "float" },
+						descripcio: { type: "richtext" },
+					},
+				},
+			},
+			{
+				resource: Categoria,
+				options: {
+					navigation: {},
+					listProperties: ["nom", "productes"],
+					// properties: {
+					// 	productes: { type: "array" },
+					// },
+				},
+			},
+		],
+		componentLoader,
+		branding: {
+			withMadeWithLove: false,
+		},
+		locale: {
+			language: "es",
+			availableLanguages: ["es"],
+			translations: {
+				es: {
+					labels: {
+						// Producte: "People",
+						ComandesPendents: "Pendents",
+						ComandesPreparades: "Preparades",
+						ComandesEntregades: "Entregades",
+						Usuari: "Usuaris",
+						Producte: "Productes",
+						Categoria: "Categories",
+					},
+					properties: {
+						username: "Correu",
+					},
+					actions: {
+						show: "Veure",
+						delete: "Eliminar",
+					},
+				},
+			},
+		},
+	});
 
-  const LocalStrategy = require("passport-local").Strategy;
-  passport.use(new LocalStrategy(Usuari.authenticate()));
+	const adminRouter = AdminJSExpress.buildRouter(admin);
+	app.use(admin.options.rootPath, adminRouter);
 
-  app.use(passport.initialize());
-  app.use(passport.session());
+	app.use(bodyParser.json());
+	app.use(bodyParser.urlencoded({ extended: false }));
+	app.use(morgan("combined"));
+	app.use(cors());
+	app.use(express.static(path.resolve("..", "client", "build")));
+	app.use(
+		session({
+			secret: "e3Uecl59gxp2WM5cclI2",
+			resave: false,
+			saveUninitialized: false,
+		})
+	);
 
-  passport.use(Usuari.createStrategy());
-  passport.serializeUser(Usuari.serializeUser());
-  passport.deserializeUser(Usuari.deserializeUser());
+	const LocalStrategy = require("passport-local").Strategy;
+	passport.use(new LocalStrategy(Usuari.authenticate()));
 
-  /**** Add routes ****/
-  app.use("/api", apiRoutes);
+	app.use(passport.initialize());
+	app.use(passport.session());
 
-  app.post("/registre", (req, res) => {
-    // res.send("Process: " + process.env.CLIENT_URL);
-    Usuari.register(
-      new Usuari({ username: req.body.correu, nom: req.body.nom, saldo: 0 }),
-      req.body.contrasenya,
-      function (err, user) {
-        if (err) {
-          console.log(err);
-          res.redirect("/registre");
-        } else {
-          req.login(user, (err) => {
-            if (err) {
-              res.redirect("/registre");
-            } else {
-              res.redirect("/");
-            }
-          });
-        }
-      }
-    );
-  });
+	passport.use(Usuari.createStrategy());
+	passport.serializeUser(Usuari.serializeUser());
+	passport.deserializeUser(Usuari.deserializeUser());
 
-  app.post(
-    "/inici-sessio",
-    passport.authenticate("local", {
-      successRedirect: "/",
-      failureRedirect: "/inici-sessio?status=invalid",
-    })
-  );
+	/**** Add routes ****/
+	app.use("/api", apiRoutes);
 
-  app.get("/tancar-sessio", (req, res) => {
-    req.logout((err) => {
-      res.redirect("/inici-sessio");
-    });
-  });
+	app.post("/registre", (req, res) => {
+		// res.send("Process: " + process.env.CLIENT_URL);
+		Usuari.register(
+			new Usuari({ username: req.body.correu, nom: req.body.nom, saldo: 0 }),
+			req.body.contrasenya,
+			function (err, user) {
+				if (err) {
+					console.log(err);
+					res.redirect("/registre");
+				} else {
+					req.login(user, err => {
+						if (err) {
+							res.redirect("/registre");
+						} else {
+							res.redirect("/");
+						}
+					});
+				}
+			}
+		);
+	});
 
-  // "Redirect" all non-API GET requests to React's entry point (index.html)
-  app.get("*", (req, res) =>
-    res.sendFile(path.resolve("..", "client", "build", "index.html"))
-  );
+	app.post(
+		"/inici-sessio",
+		passport.authenticate("local", {
+			successRedirect: "/",
+			failureRedirect: "/inici-sessio?status=invalid",
+		})
+	);
 
-  return app;
+	app.get("/tancar-sessio", (req, res) => {
+		req.logout(err => {
+			res.redirect("/inici-sessio");
+		});
+	});
+
+	// "Redirect" all non-API GET requests to React's entry point (index.html)
+	app.get("*", (req, res) =>
+		res.sendFile(path.resolve("..", "client", "build", "index.html"))
+	);
+
+	return app;
 }
 
 module.exports = createServer;

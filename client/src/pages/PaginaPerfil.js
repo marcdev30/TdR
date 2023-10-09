@@ -1,8 +1,20 @@
 import { Container, Row, Col, Form, Button, Alert } from "react-bootstrap";
 import { useState } from "react";
+import axios from "axios";
+import { useEffect } from "react";
 
 const PaginaPerfil = () => {
 	const [validated, setValidated] = useState(false);
+	const [nouNom, setNouNom] = useState("");
+
+	useEffect(() => {
+		async function getData() {
+			axios.get(process.env.REACT_APP_SERVER_URL + "/api/nom").then(response => {
+				setNouNom(response.data.nom);
+			});
+		}
+		getData();
+	}, []);
 
 	const onChange = () => {
 		const password = document.querySelector("input[name=password]");
@@ -19,6 +31,10 @@ const PaginaPerfil = () => {
 		if (form.checkValidity() === false) {
 			event.preventDefault();
 			event.stopPropagation();
+		} else {
+			axios.post(process.env.REACT_APP_SERVER_URL + "/api/nom", {
+				nouNom,
+			});
 		}
 
 		setValidated(true);
@@ -35,7 +51,9 @@ const PaginaPerfil = () => {
 								required
 								type="text"
 								defaultValue="Marc"
-								name="name"
+								name="nom"
+								value={nouNom}
+								onChange={e => setNouNom(e.target.value)}
 							/>
 							<Form.Control.Feedback type="invalid">
 								Has d'introduïr el teu nom
