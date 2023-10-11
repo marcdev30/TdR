@@ -32,6 +32,7 @@
   height: auto;
   margin-top: 20px;
   flex: 4;
+  max-height: 208px;
 }
 
 .categoria hr {

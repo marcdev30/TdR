@@ -9,6 +9,7 @@
 	"dependencies": {
 		"@adminjs/express": "^6.0.1",
 		"@adminjs/mongoose": "^4.0.0",
+		"@adminjs/upload": "^4.0.1",
 		"adminjs": "^7.2.2",
 		"cors": "^2.8.5",
 		"dotenv": "^16.3.1",
