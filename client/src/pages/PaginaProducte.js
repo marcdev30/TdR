@@ -3,6 +3,7 @@ import { Row, Col, Container, Button, Form, Breadcrumb } from "react-bootstrap";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { useEffect } from "react";
+import DOMPurify from "dompurify";
 
 const PaginaProducte = () => {
   const { producteId } = useParams();
@@ -41,10 +42,21 @@ const PaginaProducte = () => {
           <Row className="mt-5">
             <Col md={6} className="mt-2">
               <img
-                src="https://europastry.com/es/wp-content/uploads/sites/5/2021/05/3330_r1_6.jpeg"
+                src={
+                  process.env.REACT_APP_SERVER_URL +
+                  "/imatge-producte/" +
+                  producte._id +
+                  "/" +
+                  producte.imatge
+                }
                 alt=""
                 className="rounded"
-                style={{ backgroundColor: "red", width: "100%" }}
+                style={{
+                  backgroundColor: "red",
+                  width: "100%",
+                  maxHeight: "650px",
+                  objectFit: "contain",
+                }}
               />
             </Col>
             <Col md={6} className="d-flex flex-column gap-4 mt-4 mb-3">
@@ -52,11 +64,15 @@ const PaginaProducte = () => {
               <Breadcrumb>
                 <Breadcrumb.Item href="/menu">Menú</Breadcrumb.Item>
                 <Breadcrumb.Item href="/menu">Entrepans</Breadcrumb.Item>
-                <Breadcrumb.Item active>Entrepà de formatge</Breadcrumb.Item>
+                <Breadcrumb.Item active>{producte.nom}</Breadcrumb.Item>
               </Breadcrumb>
               <h2>{producte.nom}</h2>
               <h3>{producte.preu.toFixed(2)}€</h3>
-              <p>{producte.descripcio}</p>
+              <p
+                dangerouslySetInnerHTML={{
+                  __html: DOMPurify.sanitize(producte.descripcio),
+                }}
+              />
               <Form.Group
                 className="mb-3"
                 controlId="exampleForm.ControlTextarea1"

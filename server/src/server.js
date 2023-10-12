@@ -234,6 +234,7 @@ async function createServer() {
         options: {
           navigation: {},
           listProperties: ["nom", "productes"],
+          showProperties: ["nom", "descripcio", "productes"],
           properties: {
             key: {
               type: "string",
@@ -250,7 +251,11 @@ async function createServer() {
         },
         features: [
           uploadFeature({
-            properties: { key: "key", filename: "imatge" },
+            properties: {
+              key: "key",
+              filename: "imatge",
+              mimeType: "mimeType",
+            },
             componentLoader,
             provider: {
               local: {
