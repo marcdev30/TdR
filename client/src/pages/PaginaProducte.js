@@ -52,7 +52,6 @@ const PaginaProducte = () => {
                 alt=""
                 className="rounded"
                 style={{
-                  backgroundColor: "red",
                   width: "100%",
                   maxHeight: "650px",
                   objectFit: "contain",

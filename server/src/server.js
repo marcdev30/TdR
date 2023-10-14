@@ -21,6 +21,9 @@ const Producte = require("./models/Producte").default;
 const Categoria = require("./models/Categoria").default;
 const Comanda = require("./models/Comanda").default;
 
+// Utils
+const locale = require("./utils/locale").default;
+
 /**** Configuration ****/
 const app = express();
 
@@ -36,6 +39,7 @@ async function createServer() {
 
   const compo = {
     ImageShow: componentLoader.add("ImageShow", "./image-show"),
+    MyCustomAction: componentLoader.add("MyCustomAction", "./my-custom-action"),
     // other custom components
   };
 
@@ -64,6 +68,19 @@ async function createServer() {
           actions: {
             edit: { isAccessible: false, isVisible: false },
             new: { isAccessible: false, isVisible: false },
+            myNewAction: {
+              label: "amazing action",
+              icon: "Add",
+              actionType: "resource",
+              component: "MyCustomAction",
+              handler: (request, response, data) => {
+                return {
+                  record: data.record.toJSON(data.currentAdmin),
+
+                  msg: "Hello world",
+                };
+              },
+            },
           },
         },
       },
@@ -275,36 +292,20 @@ async function createServer() {
         ],
       },
     ],
+    pages: {
+      "Entregar comanda": {
+        // name, will be used to build an URL
+        // handler: () => {
+        //   return {};
+        // },
+        component: "MyCustomAction",
+        // icon: // page icon name
+      },
+    },
     branding: {
       withMadeWithLove: false,
     },
-    locale: {
-      language: "es",
-      availableLanguages: ["es"],
-      translations: {
-        es: {
-          labels: {
-            // Producte: "People",
-            ComandesPendents: "Pendents",
-            ComandesPreparades: "Preparades",
-            ComandesEntregades: "Entregades",
-            Usuari: "Usuaris",
-            Producte: "Productes",
-            Categoria: "Categories",
-          },
-          properties: {
-            username: "Correu",
-          },
-          actions: {
-            show: "Veure",
-            delete: "Eliminar",
-          },
-          buttons: {
-            save: "Desar",
-          },
-        },
-      },
-    },
+    locale: locale,
     componentLoader,
   });
 
