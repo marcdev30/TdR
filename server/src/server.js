@@ -11,6 +11,7 @@ const cors = require("cors");
 const session = require("express-session");
 const passport = require("passport");
 const { default: mongoose } = require("mongoose");
+const MongoDBStore = require("connect-mongodb-session")(session);
 
 // .env configuration
 require("dotenv").config();
@@ -27,6 +28,13 @@ const locale = require("./utils/locale").default;
 /**** Configuration ****/
 const app = express();
 
+const authenticate = async (email, password) => {
+  if (email === "email" && password === "password") {
+    return Promise.resolve({ email: "email", password: "password" });
+  }
+  return null;
+};
+
 async function createServer() {
   const apiRoutes = require("./apiRoutes")();
   const mesDemanat = require("./utils/tasques")();
@@ -39,17 +47,15 @@ async function createServer() {
 
   const compo = {
     ImageShow: componentLoader.add("ImageShow", "./image-show"),
-    MyCustomAction: componentLoader.add("MyCustomAction", "./my-custom-action"),
-    // other custom components
+    EntregarComanda: componentLoader.add(
+      "EntregarComanda",
+      "./entregar-comanda"
+    ),
+    AfegirSaldo: componentLoader.add("AfegirSaldo", "./afegir-saldo"),
+    Dashboard: componentLoader.add("Dashboard", "./dashboard"),
   };
 
   const uploadFeature = (await import("@adminjs/upload")).default;
-  const localProvider = {
-    bucket: "src/imatges",
-    opts: {
-      baseUrl: "/imatges",
-    },
-  };
 
   AdminJS.registerAdapter({
     Resource: AdminJSMongoose.Resource,
@@ -90,15 +96,16 @@ async function createServer() {
         options: {
           id: "ComandesPendents",
           navigation: { name: "Comandes" },
-          listProperties: ["usuari", "producte", "estat", "comentaris"],
+          listProperties: ["usuari", "producte", "codi", "estat", "comentaris"],
           showProperties: [
             "usuari",
             "producte",
+            "codi",
             "estat",
             "comentaris",
             "creada",
           ],
-          filterProperties: ["usuari", "producte", "creada"],
+          filterProperties: ["usuari", "producte", "creada", "codi"],
           actions: {
             list: {
               after: async (response) => {
@@ -293,23 +300,48 @@ async function createServer() {
       },
     ],
     pages: {
-      "Entregar comanda": {
-        // name, will be used to build an URL
-        // handler: () => {
-        //   return {};
-        // },
-        component: "MyCustomAction",
-        // icon: // page icon name
+      "Afegir Saldo": {
+        component: "AfegirSaldo",
+      },
+      "Entregar una comanda": {
+        component: "EntregarComanda",
       },
     },
     branding: {
       withMadeWithLove: false,
     },
     locale: locale,
+    dashboard: {
+      component: compo.Dashboard,
+    },
+
     componentLoader,
   });
 
-  const adminRouter = AdminJSExpress.buildRouter(admin);
+  const sessionStore = new MongoDBStore({
+    uri: "mongodb+srv://admin:passwd@maincluster.5epli6n.mongodb.net/auth?retryWrites=true&w=majority", // MongoDB connection URI
+    collection: "sessions", // Collection name for sessions
+  });
+
+  const adminRouter = AdminJSExpress.buildAuthenticatedRouter(
+    admin,
+    {
+      authenticate,
+      cookieName: "cafeteriaSession",
+      cookiePassword: "simple",
+    },
+    null,
+    {
+      store: sessionStore,
+      resave: true,
+      saveUninitialized: true,
+      secret: "simple",
+      cookie: {
+        httpOnly: process.env.NODE_ENV === "production",
+        secure: process.env.NODE_ENV === "production",
+      },
+    }
+  );
   app.use(admin.options.rootPath, adminRouter);
 
   app.use(bodyParser.json());

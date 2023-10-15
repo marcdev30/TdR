@@ -3,6 +3,7 @@ module.exports = () => {
 
   const Comanda = require("../models/Comanda").default;
   const Producte = require("../models/Producte").default;
+  const Codi = require("../models/Codi").default;
 
   cron.schedule("*/5 * * * * *", async () => {
     const comandes = await Comanda.find({}).populate("producte").exec();
@@ -25,6 +26,13 @@ module.exports = () => {
     countArray.sort((a, b) => b.count - a.count);
 
     console.log((await Producte.findById(countArray[0].producte)).nom);
+  });
+
+  cron.schedule("0 0 * * *", async () => {
+    try {
+      await Codi.deleteMany({});
+      console.log("Tots els codis de comandes s'han restablert correctament!");
+    } catch (err) {}
   });
 
   //   const allCrons = cron.listCrons();

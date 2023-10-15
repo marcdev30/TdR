@@ -5,6 +5,7 @@ module.exports = () => {
   const Categoria = require("./models/Categoria").default;
   const Producte = require("./models/Producte").default;
   const Comanda = require("./models/Comanda").default;
+  const Codi = require("./models/Codi").default;
   const fs = require("fs");
 
   /**** Routes ****/
@@ -30,16 +31,39 @@ module.exports = () => {
         req.body.producte !== null &&
         req.body.estat !== null &&
         req.body.comentaris !== null &&
-        req.body.usuari !== null
+        req.body.usuari !== null &&
+        req.body.codi !== null
       ) {
         const comanda = new Comanda({
           usuari: req.body.usuari,
           producte: req.body.producte,
           estat: req.body.estat,
           comentaris: req.body.comentaris,
+          codi: req.body.codi,
         });
         comanda.save();
       }
+    }
+  });
+
+  router.get("/generar-codi-comanda", async (req, res) => {
+    if (req.isAuthenticated()) {
+      let codiTrobat = null;
+      while (true) {
+        const codiAleatori =
+          Math.floor(Math.random() * (9999 - 1000 + 1)) + 1000;
+        if ((await Codi.findOne({ _id: codiAleatori })) === null) {
+          codiTrobat = codiAleatori;
+          const nouCodi = new Codi({
+            _id: codiTrobat,
+          });
+          nouCodi.save();
+          break;
+        }
+      }
+      res.json(codiTrobat);
+    } else {
+      res.send("Not authenticated");
     }
   });
 

@@ -90,9 +90,15 @@ const PaginaProducte = () => {
                   variant="success"
                   size="lg"
                   className="d-flex justify-content-center gap-3 align-items-center mb-5"
-                  onClick={() => {
+                  onClick={async () => {
                     if (userInfo) {
                       setSubmitted(true);
+                      const codi = (
+                        await axios.get(
+                          process.env.REACT_APP_SERVER_URL +
+                            "/generar-codi-comanda"
+                        )
+                      ).data;
                       axios.post(
                         process.env.REACT_APP_SERVER_URL + "/comanda",
                         {
@@ -100,6 +106,7 @@ const PaginaProducte = () => {
                           producte: producteId,
                           estat: "pendent",
                           comentaris: comentaris,
+                          codi,
                         }
                       );
                       setTimeout(() => navigate("/"), 1400);
