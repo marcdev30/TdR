@@ -9,8 +9,8 @@ import PaginaContacte from "./pages/PaginaContacte";
 import PaginaProducte from "./pages/PaginaProducte";
 import PaginaRegistre from "./pages/PaginaRegistre";
 import PaginaISessio from "./pages/PaginaISessio";
-import PaginaDetallsProducte from "./pages/PaginaDetallsProducte";
 import PaginaPerfil from "./pages/PaginaPerfil";
+import PaginaComandes from "./pages/PaginaComandes";
 
 function App() {
 	return (
@@ -24,8 +24,12 @@ function App() {
 				<Route path="/registre" element={<PaginaRegistre />} />
 				<Route path="/inici-sessio" element={<PaginaISessio />} />
 				<Route path="/perfil" element={<PaginaPerfil />} />
+				<Route path="/comandes" element={<PaginaComandes />} />
 			</Routes>
 			<PeuComponent />
+
+			<link href="toastr.css" rel="stylesheet" />
+			<script src="toastr.js"></script>
 		</BrowserRouter>
 	);
 }

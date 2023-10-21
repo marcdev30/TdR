@@ -6,7 +6,7 @@ import Button from "react-bootstrap/Button";
 const Presentacio = () => {
 	const [temps, setTemps] = useState({ hores: 5, minuts: 5, segons: 5 });
 	const getData = () => {
-		axios.get("http://localhost:8080/api/temps").then(response => {
+		axios.get(process.env.REACT_APP_API_URL + "/temps").then(response => {
 			setTemps(response.data);
 		});
 	};

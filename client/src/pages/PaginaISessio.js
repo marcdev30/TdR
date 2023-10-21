@@ -32,7 +32,7 @@ const PaginaISessio = () => {
 						<Form
 							// noValidate
 							// onSubmit={handleSubmit}
-							action="/inici-sessio"
+							action={process.env.REACT_APP_SERVER_URL + "/inici-sessio"}
 							method="post"
 							className="w-100 d-flex flex-column"
 						>

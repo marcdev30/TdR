@@ -26,6 +26,10 @@
 	cursor: pointer;
 }
 
+.categoria.producte {
+	height: 320px;
+}
+
 .categoria img {
 	-ms-scroll-limit-x-max: x;
 	max-width: 90%;
@@ -49,4 +53,11 @@
 	letter-spacing: 0.5px;
 	flex: 1;
 	margin: 0;
+	max-height: 29px;
+}
+
+.preu {
+	margin-bottom: 5px;
+	font-weight: 500;
+	color: #979797;
 }
