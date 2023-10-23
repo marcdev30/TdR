@@ -6,7 +6,7 @@ const Producte = ({ imatge, producte }) => {
 			to={`/producte/${producte._id}`}
 			style={{ textDecoration: "none", color: "black" }}
 		>
-			<div className="categoria producte">
+			<div className={`categoria ${producte.fons ? "categoria-fons" : ""} producte`}>
 				<img src={imatge} alt="Imatge de la categoria" />
 				<hr />
 				<p className="categoria-nom">{producte.nom}</p>

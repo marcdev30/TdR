@@ -6,7 +6,7 @@ const MesDemanat = () => {
 				<h3>ENTREPÀ DE TRUITA</h3>
 				<p>L'entrepà de truita és l'esmorzar que més ha triomfat l'últim mes.</p>
 				<a className="button" href="/">
-					Reserva
+					Reserva ara
 				</a>
 			</div>
 			<img src="images/truita.jpg" alt="Més demanat" className="mes-demanat-img" />

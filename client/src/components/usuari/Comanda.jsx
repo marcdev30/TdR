@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const Comanda = ({ producte, preu, descripcio, imatge, data, entregat }) => {
+const Comanda = ({ producte, preu, descripcio, imatge, data, entregat, codi }) => {
 	const [mouseSobre, setMouseSobre] = useState(false);
 
 	return (
@@ -19,7 +19,7 @@ const Comanda = ({ producte, preu, descripcio, imatge, data, entregat }) => {
 							Demana el teu producte a les 11:00 hores a la cafeteria del centre
 							amb el codi:
 						</h5>
-						<h4>8888</h4>
+						<h4>{codi}</h4>
 					</div>
 				) : (
 					<>

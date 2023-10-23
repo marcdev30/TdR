@@ -46,6 +46,7 @@ const QuadriculaCategories = ({
 					index={index}
 					imatge={categoria.imatge}
 					nom={categoria.nom}
+					fons={categoria.fons}
 				/>
 			))}
 		</div>

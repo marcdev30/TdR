@@ -16,25 +16,28 @@ const PaginaProducte = () => {
 
 	return (
 		<div className="pagina-comandes">
-			{comandes.map((comanda, index) => (
-				<>
-					<Comanda
-						key={index}
-						producte={comanda.producte.nom}
-						preu={comanda.producte.preu}
-						imatge={
-							process.env.REACT_APP_API_URL +
-							"/imatge-producte/" +
-							comanda.producte._id +
-							"/" +
-							comanda.producte.imatge
-						}
-						descripcio={comanda.producte.descripcio}
-						data={comanda.creada}
-						entregat={comanda.estat === "entregada"}
-					/>
-				</>
-			))}
+			{comandes
+				.sort((a, b) => new Date(b.creada) - new Date(a.creada))
+				.map((comanda, index) => (
+					<>
+						<Comanda
+							key={index}
+							producte={comanda.producte.nom}
+							preu={comanda.producte.preu}
+							imatge={
+								process.env.REACT_APP_API_URL +
+								"/imatge-producte/" +
+								comanda.producte._id +
+								"/" +
+								comanda.producte.imatge
+							}
+							descripcio={comanda.producte.descripcio}
+							data={comanda.creada}
+							entregat={comanda.estat === "entregada"}
+							codi={comanda.codi}
+						/>
+					</>
+				))}
 		</div>
 	);
 };

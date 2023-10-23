@@ -40,9 +40,24 @@
 	object-fit: contain;
 }
 
+.categoria-fons img {
+	width: 100%;
+	object-fit: cover;
+	height: 100px;
+	max-width: 100%;
+	max-height: 500px;
+	margin: 0;
+	flex: 4;
+	border-radius: 10px 10px 0 0;
+}
+
 .categoria hr {
 	border: 1px solid #9c9c9c;
 	width: 100%;
+}
+
+.categoria-fons hr {
+	margin-top: 0;
 }
 
 .categoria-nom {
@@ -54,6 +69,10 @@
 	flex: 1;
 	margin: 0;
 	max-height: 29px;
+}
+
+.categoria-fons:not(.producte) > .categoria-nom {
+	margin-bottom: 1rem;
 }
 
 .preu {

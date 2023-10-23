@@ -15,3 +15,7 @@
 .copyright {
 	margin: 0;
 }
+
+.dropdown-toggle:after {
+	content: unset;
+}

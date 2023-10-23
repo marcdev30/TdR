@@ -1,6 +1,7 @@
-import { Button, Col, Container, Nav, Navbar, Row } from "react-bootstrap";
+import { Button, Col, Container, Dropdown, Nav, Navbar, Row } from "react-bootstrap";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import "../../styles/disseny.css";
 
 const CapçaleraComponent = () => {
 	const [userInfo, setUserInfo] = useState();
@@ -42,12 +43,31 @@ const CapçaleraComponent = () => {
 					<Col md={4} className="d-flex justify-content-end">
 						<Nav className="gap-4">
 							{userInfo ? (
-								<Nav.Link href="/perfil">
-									<Button variant="primary" className="me-3 rounded-circle">
-										{userInfo.nom[0]}
+								<Nav.Item>
+									<Dropdown className="d-inline mx-2">
+										<Dropdown.Toggle
+											id="dropdown-autoclose-true"
+											className="me-3 rounded-circle"
+										>
+											{userInfo.nom[0]}
+										</Dropdown.Toggle>
+
+										<Dropdown.Menu>
+											<Dropdown.Item href="/perfil">
+												Perfil
+											</Dropdown.Item>
+											<Dropdown.Item href="/comandes">
+												Comandes
+											</Dropdown.Item>
+											<Dropdown.Item href="#">
+												Tancar la sessió
+											</Dropdown.Item>
+										</Dropdown.Menu>
+									</Dropdown>
+									<Button variant="outline-success">
+										{userInfo.saldo.toFixed(2).replace(".", ",")} €
 									</Button>
-									<Button variant="outline-success">12.30 €</Button>
-								</Nav.Link>
+								</Nav.Item>
 							) : (
 								<>
 									<Nav.Link href="/inici-sessio">

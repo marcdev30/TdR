@@ -182,8 +182,8 @@ async function createServer() {
 				options: {
 					navigation: {},
 					listProperties: ["nom", "preu", "descripcio"],
-					showProperties: ["nom", "preu", "descripcio", "file"],
-					editProperties: ["nom", "preu", "descripcio", "file"],
+					showProperties: ["nom", "preu", "descripcio", "file", "fons"],
+					editProperties: ["nom", "preu", "descripcio", "file", "fons"],
 					filterProperties: ["nom", "preu"],
 					properties: {
 						preu: { type: "float" },
@@ -198,6 +198,14 @@ async function createServer() {
 								list: compo.ImageShow,
 								show: compo.ImageShow,
 							},
+						},
+						fons: {
+							isVisible: {
+								show: true,
+								edit: true,
+							},
+							description:
+								"Marqui aquesta casella si la imatge NO té un fons transparent.",
 						},
 					},
 				},
@@ -222,7 +230,8 @@ async function createServer() {
 				options: {
 					navigation: {},
 					listProperties: ["nom", "productes"],
-					showProperties: ["nom", "descripcio", "productes"],
+					showProperties: ["nom", "descripcio", "productes", "fons"],
+					editProperties: ["nom", "descripcio", "file", "fons", "productes"],
 					properties: {
 						key: {
 							type: "string",
@@ -234,6 +243,14 @@ async function createServer() {
 								list: compo.ImageShow,
 								show: compo.ImageShow,
 							},
+						},
+						fons: {
+							isVisible: {
+								show: true,
+								edit: true,
+							},
+							description:
+								"Marqui aquesta casella si la imatge NO té un fons transparent.",
 						},
 					},
 				},
