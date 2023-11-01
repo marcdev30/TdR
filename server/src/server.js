@@ -41,7 +41,7 @@ async function createServer() {
 	const apiRoutes = require("./apiRoutes")();
 	const mesDemanat = require("./utils/tasques")();
 
-	const AdminJS = (await import("adminjs")).default;
+	// const AdminJS = (await import("adminjs")).default;
 	// const AdminJSExpress = (await import("@adminjs/express")).default;
 	// AdminJSMongoose = await import("@adminjs/mongoose");
 	// const ComponentLoader = (await import("adminjs")).ComponentLoader;
