@@ -32,7 +32,7 @@ const axios = require("axios");
 
 const authenticate = async (email, password) => {
 	if (email === "email" && password === "password") {
-		return Promise.resolve({ email: "email", password: "password" });
+		return { email: "email", password: "password" };
 	}
 	return null;
 };
