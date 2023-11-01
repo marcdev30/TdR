@@ -45,7 +45,7 @@ async function createServer() {
 
 			// const AdminJS = (await import("adminjs")).default;
 			// const AdminJSExpress = (await import("@adminjs/express")).default;
-			// AdminJSMongoose = await import("@adminjs/mongoose");
+			AdminJSMongoose = await import("@adminjs/mongoose");
 			// const ComponentLoader = (await import("adminjs")).ComponentLoader;
 			// const componentLoader = new ComponentLoader();
 
