@@ -54,6 +54,12 @@ async function createServer() {
 		Dashboard: componentLoader.add("Dashboard", "./dashboard"),
 	};
 
+	const dashboardHandler = async () => {
+		// Asynchronous code where you, e. g. fetch data from your database
+
+		return { message: "Hello World" };
+	};
+
 	const uploadFeature = (await import("@adminjs/upload")).default;
 
 	AdminJS.registerAdapter({
@@ -289,6 +295,7 @@ async function createServer() {
 		locale: locale,
 		dashboard: {
 			component: compo.Dashboard,
+			handler: dashboardHandler,
 		},
 
 		componentLoader,
@@ -349,7 +356,7 @@ async function createServer() {
 	app.post("/registre", (req, res) => {
 		// res.send("Process: " + process.env.CLIENT_URL);
 		Usuari.register(
-			new Usuari({ username: req.body.correu, nom: req.body.nom, saldo: 0 }),
+			new Usuari({ username: req.body.correu, nom: req.body.nom, saldo: 10 }),
 			req.body.contrasenya,
 			function (err, user) {
 				if (err) {
