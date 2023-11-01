@@ -28,7 +28,7 @@ const locale = require("./utils/locale").default;
 /**** Configuration ****/
 const app = express();
 const { createRequire } = require("module");
-const require = createRequire(import.meta.url);
+const required = createRequire(import.meta.url);
 
 const axios = require("axios");
 
@@ -45,7 +45,7 @@ async function createServer() {
 
 	// const AdminJS = (await import("adminjs")).default;
 	// const AdminJSExpress = (await import("@adminjs/express")).default;
-	const AdminJSMongoose = require("@adminjs/mongoose");
+	const AdminJSMongoose = required("@adminjs/mongoose");
 	// const ComponentLoader = (await import("adminjs")).ComponentLoader;
 	// const componentLoader = new ComponentLoader();
 
