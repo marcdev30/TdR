@@ -8,7 +8,7 @@ const morgan = require("morgan");
 const cors = require("cors");
 
 // DB configuration
-const session = require("cookie-session");
+const session = require("express-session");
 const passport = require("passport");
 const { default: mongoose } = require("mongoose");
 const MongoDBStore = require("connect-mongodb-session")(session);
