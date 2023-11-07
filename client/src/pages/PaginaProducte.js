@@ -107,6 +107,7 @@ const PaginaProducte = () => {
 													estat: "pendent",
 													comentaris: comentaris,
 													codi,
+													preu: producte.preu,
 												}
 											);
 											setTimeout(() => navigate("/comandes"), 1400);

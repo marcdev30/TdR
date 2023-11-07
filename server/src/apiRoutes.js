@@ -69,7 +69,8 @@ module.exports = () => {
 				req.body.estat !== null &&
 				req.body.comentaris !== null &&
 				req.body.usuari !== null &&
-				req.body.codi !== null
+				req.body.codi !== null &&
+				req.body.preu !== null
 			) {
 				// console.log(req.body);
 				const comanda = new Comanda({
@@ -83,7 +84,11 @@ module.exports = () => {
 				const usuari = await Usuari.findById(req.body.usuari);
 				const comandesUsuari = usuari.comandes;
 				comandesUsuari.push(comanda._id);
-				await Usuari.updateOne({ _id: req.body.usuari }, { comandes: comandesUsuari });
+				const saldo = usuari.saldo - preu;
+				await Usuari.updateOne(
+					{ _id: req.body.usuari },
+					{ comandes: comandesUsuari, saldo }
+				);
 			}
 		}
 	});
