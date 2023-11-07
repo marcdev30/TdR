@@ -84,7 +84,7 @@ module.exports = () => {
 				const usuari = await Usuari.findById(req.body.usuari);
 				const comandesUsuari = usuari.comandes;
 				comandesUsuari.push(comanda._id);
-				const saldo = usuari.saldo - preu;
+				const saldo = usuari.saldo - req.body.preu;
 				await Usuari.updateOne(
 					{ _id: req.body.usuari },
 					{ comandes: comandesUsuari, saldo }
