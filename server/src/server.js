@@ -356,7 +356,7 @@ async function createServer() {
 	app.post("/registre", (req, res) => {
 		// res.send("Process: " + process.env.CLIENT_URL);
 		Usuari.register(
-			new Usuari({ username: req.body.correu, nom: req.body.nom, saldo: 10 }),
+			new Usuari({ username: req.body.correu, nom: req.body.nom, saldo: 5 }),
 			req.body.contrasenya,
 			function (err, user) {
 				if (err) {

@@ -110,7 +110,10 @@ const PaginaProducte = () => {
 													preu: producte.preu,
 												}
 											);
-											setTimeout(() => redirect("/comandes"), 1400);
+											setTimeout(() => {
+												navigate("/comandes", { replace: true });
+												navigate(0);
+											}, 1400);
 										} else {
 											navigate("/inici-sessio");
 										}
