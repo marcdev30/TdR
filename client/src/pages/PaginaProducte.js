@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Row, Col, Container, Button, Form, Breadcrumb } from "react-bootstrap";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams, redirect } from "react-router-dom";
 import axios from "axios";
 import { useEffect } from "react";
 import DOMPurify from "dompurify";
@@ -110,7 +110,7 @@ const PaginaProducte = () => {
 													preu: producte.preu,
 												}
 											);
-											setTimeout(() => navigate("/comandes"), 1400);
+											setTimeout(() => redirect("/comandes"), 1400);
 										} else {
 											navigate("/inici-sessio");
 										}

@@ -5,13 +5,13 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 const PaginaPrincipal = () => {
-  return (
-    <>
-      <Presentacio />
-      <MesDemanat />
-      <Qualitats />
-    </>
-  );
+	return (
+		<>
+			<Presentacio />
+			<MesDemanat />
+			{/* <Qualitats /> */}
+		</>
+	);
 };
 
 export default PaginaPrincipal;
