@@ -31,7 +31,10 @@ const app = express();
 const axios = require("axios");
 
 const authenticate = async (email, password) => {
+	console.log("This is the email: " + email);
+	console.log("This is the password: " + password);
 	if (email === "email" && password === "password") {
+		console.log("The credentials are right!");
 		return Promise.resolve({ email: "email", password: "password" });
 	}
 	return null;
