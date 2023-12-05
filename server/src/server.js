@@ -318,14 +318,14 @@ async function createServer() {
 		},
 		null,
 		{
-			store: sessionStore,
+			// store: sessionStore,
 			resave: true,
 			saveUninitialized: true,
 			secret: "simple",
-			cookie: {
-				httpOnly: process.env.NODE_ENV === "production",
-				secure: process.env.NODE_ENV === "production",
-			},
+			// cookie: {
+			// 	httpOnly: process.env.NODE_ENV === "production",
+			// 	secure: process.env.NODE_ENV === "production",
+			// },
 		}
 	);
 	app.use(admin.options.rootPath, adminRouter);
