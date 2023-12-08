@@ -49,7 +49,8 @@ const MyCustomAction = props => {
 						e.preventDefault();
 						(
 							await axios.get(
-								"http://localhost:8080/admin/api/resources/Comanda/actions/list?filters.estat=pendent&perPage=500"
+								process.env.SERVER +
+									"/admin/api/resources/Comanda/actions/list?filters.estat=pendent&perPage=500"
 							)
 						).data.records.every(async record => {
 							const dataCreat = new Date(record.params.creada);
@@ -63,14 +64,16 @@ const MyCustomAction = props => {
 								console.log("Yey");
 								const userRecord = (
 									await axios.get(
-										"http://localhost:8080/admin/api/resources/Usuari/records/" +
+										process.env.SERVER +
+											"/admin/api/resources/Usuari/records/" +
 											record.params.usuari +
 											"/show"
 									)
 								).data.record.params;
 								const productRecord = (
 									await axios.get(
-										"http://localhost:8080/admin/api/resources/Producte/records/" +
+										process.env.SERVER +
+											"/admin/api/resources/Producte/records/" +
 											record.params.producte +
 											"/show"
 									)
@@ -127,7 +130,8 @@ const MyCustomAction = props => {
 											onClick={async () => {
 												setNom();
 												axios.post(
-													"http://localhost:8080/admin/api/resources/Comanda/records/" +
+													process.env.SERVER +
+														"/admin/api/resources/Comanda/records/" +
 														recordId +
 														"/edit",
 													{

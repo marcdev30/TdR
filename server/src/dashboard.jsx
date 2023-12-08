@@ -108,6 +108,7 @@ export const Dashboard = () => {
 	useEffect(() => {
 		api.getDashboard()
 			.then(response => {
+				console.log(response);
 				setData(response.data); // { message: 'Hello World' }
 			})
 			.catch(error => {
@@ -143,16 +144,13 @@ export const Dashboard = () => {
 										<th>Quantitat</th>
 										{/* <th>Country</th> */}
 									</tr>
-									<tr>
-										<td>{data.message}</td>
-										<td>5</td>
-										{/* <td>Germany</td> */}
-									</tr>
-									<tr>
-										<td>Entrepà de fuet</td>
-										<td>2</td>
-										{/* <td>Mexico</td> */}
-									</tr>
+									{data.records.map(record => (
+										<tr>
+											<td>{record.populated.producte.params.nom}</td>
+											<td>5</td>
+											{/* <td>Germany</td> */}
+										</tr>
+									))}
 								</table>
 							</Text>
 						</Card>

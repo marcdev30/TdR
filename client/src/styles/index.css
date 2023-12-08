@@ -63,9 +63,13 @@
 	font-weight: bold;
 }
 
-.comptaenrere-obert {
+.comptaenrere-obert-en {
 	color: white;
 	text-align: center;
+}
+
+.comptaenrere-obert {
+	color: #61f161;
 }
 
 .comptaenrere-tancat {

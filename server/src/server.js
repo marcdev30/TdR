@@ -59,8 +59,14 @@ async function createServer() {
 
 	const dashboardHandler = async () => {
 		// Asynchronous code where you, e. g. fetch data from your database
-
-		return { message: "Hello World" };
+		axios
+			.get(
+				process.env.REACT_APP_SERVER_URL +
+					"/admin/api/resources/Comanda/actions/list?filters.estat=pendent"
+			)
+			.then(response => {
+				return { records: response.data.records };
+			});
 	};
 
 	const uploadFeature = (await import("@adminjs/upload")).default;

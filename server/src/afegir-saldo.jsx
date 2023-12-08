@@ -51,13 +51,15 @@ const MyCustomAction = props => {
 						e.preventDefault();
 						(
 							await axios.get(
-								"http://localhost:8080/admin/api/resources/Usuari/actions/list?filters.username=" +
+								process.env.SERVER +
+									"/admin/api/resources/Usuari/actions/list?filters.username=" +
 									correuEntrat
 							)
 						).data.records.forEach(record => {
 							axios
 								.post(
-									"http://localhost:8080/admin/api/resources/Usuari/records/" +
+									process.env.SERVER +
+										"/admin/api/resources/Usuari/records/" +
 										record.params._id +
 										"/edit",
 									{

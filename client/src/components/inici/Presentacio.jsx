@@ -4,7 +4,7 @@ import { Col, Container, Row } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 
 const Presentacio = () => {
-	const [temps, setTemps] = useState({ hores: 5, minuts: 5, segons: 5 });
+	const [temps, setTemps] = useState({ obert: false, hores: 5, minuts: 5, segons: 5 });
 	const getData = () => {
 		axios.get(process.env.REACT_APP_API_URL + "/temps").then(response => {
 			setTemps(response.data);
@@ -31,11 +31,11 @@ const Presentacio = () => {
 					newTemps.segons = 59;
 					newTemps.minuts = 59;
 					newTemps.hores -= 1;
+				} else {
+					getData();
 				}
 				return newTemps;
 			});
-			console.log((temps.segons < 10 ? "0" : "") + temps.segons);
-			console.log(temps);
 		}, 1000);
 		return () => clearInterval(interval);
 	}, [temps]);
@@ -60,11 +60,17 @@ const Presentacio = () => {
 						<div className="comptaenrere">
 							<h4>
 								Sistema de reserves:{" "}
-								<span className="comptaenrere-estat comptaenrere-tancat">
-									TANCAT
+								<span
+									className={`comptaenrere-estat ${
+										temps.obert
+											? "comptaenrere-obert"
+											: "comptaenrere-tancat"
+									}`}
+								>
+									{temps.obert ? "OBERT" : "TANCAT"}
 								</span>
 							</h4>
-							<p style={{ margin: 0 }} className="comptaenrere-obert">
+							<p style={{ margin: 0 }} className="comptaenrere-obert-en">
 								Obre en:
 							</p>
 							<hr />
