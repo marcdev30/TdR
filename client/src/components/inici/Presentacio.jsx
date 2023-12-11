@@ -48,12 +48,12 @@ const Presentacio = () => {
 						<h1>Cafeteria Serrallarga</h1>
 						<p>Evita les cues i reserva ara la teva comanda.</p>
 						<div>
-							<Button href="/menu" variant="dark">
+							<Button href="/menu" variant="light">
 								Veure el menú
 							</Button>
-							<Button href="/inici-sessio" variant="outline-light">
+							{/* <Button href="/inici-sessio" variant="outline-light">
 								Iniciar sessió
-							</Button>
+							</Button> */}
 						</div>
 					</Col>
 					<Col md={6} className="presentacio-comptaenrere">
@@ -71,7 +71,7 @@ const Presentacio = () => {
 								</span>
 							</h4>
 							<p style={{ margin: 0 }} className="comptaenrere-obert-en">
-								Obre en:
+								{temps.obert ? "Tanca en:" : "Obre en:"}
 							</p>
 							<hr />
 							<div className="comptaenrere-digits">

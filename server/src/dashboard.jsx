@@ -102,7 +102,7 @@ Card.defaultProps = {
 };
 
 export const Dashboard = () => {
-	const [data, setData] = useState({});
+	const [data, setData] = useState({ records: [] });
 	const api = new ApiClient();
 
 	useEffect(() => {
@@ -141,13 +141,13 @@ export const Dashboard = () => {
 								<table>
 									<tr>
 										<th>Producte</th>
-										<th>Quantitat</th>
+										{/* <th>Quantitat</th> */}
 										{/* <th>Country</th> */}
 									</tr>
 									{data.records.map(record => (
 										<tr>
-											<td>{record.populated.producte.params.nom}</td>
-											<td>5</td>
+											<td>{record.producte.nom}</td>
+											{/* <td>5</td> */}
 											{/* <td>Germany</td> */}
 										</tr>
 									))}

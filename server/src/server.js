@@ -59,14 +59,9 @@ async function createServer() {
 
 	const dashboardHandler = async () => {
 		// Asynchronous code where you, e. g. fetch data from your database
-		axios
-			.get(
-				process.env.REACT_APP_SERVER_URL +
-					"/admin/api/resources/Comanda/actions/list?filters.estat=pendent"
-			)
-			.then(response => {
-				return { records: response.data.records };
-			});
+		return {
+			records: await Comanda.find({ estat: "pendent" }).populate("producte").exec(),
+		};
 	};
 
 	const uploadFeature = (await import("@adminjs/upload")).default;
@@ -365,7 +360,7 @@ async function createServer() {
 	app.post("/registre", (req, res) => {
 		// res.send("Process: " + process.env.CLIENT_URL);
 		Usuari.register(
-			new Usuari({ username: req.body.correu, nom: req.body.nom, saldo: 5 }),
+			new Usuari({ username: req.body.correu, nom: req.body.nom, saldo: 0 }),
 			req.body.contrasenya,
 			function (err, user) {
 				if (err) {
