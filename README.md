@@ -1,1 +1,3 @@
-const story = await Categoria.findOne({}).populate("productes").exec();
+Aquest és el codi font per a el Treball de Recerca de Marc Colldeforns Armero.
+
+El servidor està desplegat a: https://serra-bar.onrender.com
